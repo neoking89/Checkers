@@ -9,12 +9,11 @@ namespace Checkers;
 /// <summary>
 /// This class is responsible for creating the board and the pieces.
 /// </summary>
-internal class Board
+public class Board
 
 {
 	public Color[,] Fields { get; set; } = new Color[10, 10];
     public Dictionary<(int, int), Piece> CurrentPiecePositions { get; set; } = new Dictionary<(int, int), Piece>();
-
     
     public Board()
     {
@@ -34,9 +33,7 @@ internal class Board
             {
                 if ((y < 3 || y > 6) && Fields[y,x] == Color.Black)
                 {
-                    {
-                        CurrentPiecePositions.Add((y, x), new Piece(y < 3 ? Color.White : Color.Black));
-                    }
+                    CurrentPiecePositions.Add((y, x), new Piece(color: y < 3 ? Color.White : Color.Black, position: (y,x)));
                 }
             }
         }
@@ -67,10 +64,21 @@ internal class Board
 			{
 				return CurrentPiecePositions[(y, x)];
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
+	}
+
+    public void PrintBoard()
+    {
+        Console.WriteLine("------------------------------");
+        
+		foreach (var item in CurrentPiecePositions)
+		{
+            string symbol = item.Value.Color == Color.White ? "W" : "B";
+			Console.Write($"| {symbol} ");
+		}
+
+		Console.WriteLine("------------------------------");
 	}
 }
