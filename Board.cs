@@ -9,31 +9,31 @@ namespace Checkers;
 /// <summary>
 /// This class is responsible for creating the board and the pieces.
 /// </summary>
-public class Board
+public class Board : IBoard
 
 {
-	public Color[,] Fields { get; set; } = new Color[10, 10];
+    public Color[,] Fields { get; set; } = new Color[10, 10];
     public Dictionary<(int, int), Piece> CurrentPiecePositions { get; set; } = new Dictionary<(int, int), Piece>();
-    
+
     public Board()
     {
         CreateBoard();
     }
 
 
-	/// <summary>
-	/// Creates pieces on the board
-	/// </summary>
-	public void CreatePieces()
-    
-	{
-		for (int y = 0; y < 10; y++)
+    /// <summary>
+    /// Creates pieces on the board
+    /// </summary>
+    public void CreatePieces()
+
+    {
+        for (int y = 0; y < 10; y++)
         {
             for (int x = 0; x < 10; x++)
             {
-                if ((y < 3 || y > 6) && Fields[y,x] == Color.Black)
+                if ((y < 3 || y > 6) && Fields[y, x] == Color.Black)
                 {
-                    CurrentPiecePositions.Add((y, x), new Piece(color: y < 3 ? Color.White : Color.Black, position: (y,x)));
+                    CurrentPiecePositions.Add((y, x), new Piece(color: y < 3 ? Color.White : Color.Black, position: (y, x)));
                 }
             }
         }
@@ -56,29 +56,29 @@ public class Board
     }
 
 
-	public Piece? this[int y, int x]
-	{
-		get
-		{
-			if (CurrentPiecePositions.ContainsKey((y, x)))
-			{
-				return CurrentPiecePositions[(y, x)];
-			}
+    public Piece? this[int y, int x]
+    {
+        get
+        {
+            if (CurrentPiecePositions.ContainsKey((y, x)))
+            {
+                return CurrentPiecePositions[(y, x)];
+            }
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 
     public void PrintBoard()
     {
         Console.WriteLine("------------------------------");
-        
-		foreach (var item in CurrentPiecePositions)
-		{
-            string symbol = item.Value.Color == Color.White ? "W" : "B";
-			Console.Write($"| {symbol} ");
-		}
 
-		Console.WriteLine("------------------------------");
-	}
+        foreach (var item in CurrentPiecePositions)
+        {
+            string symbol = item.Value.Color == Color.White ? "W" : "B";
+            Console.Write($"| {symbol} ");
+        }
+
+        Console.WriteLine("------------------------------");
+    }
 }

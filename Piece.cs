@@ -1,9 +1,11 @@
-﻿namespace Checkers
+﻿using Checkers.Interfaces;
+
+namespace Checkers
 {
-	/// <summary>
-	/// Piece Class. Instantiate with a color.
-	/// </summary>
-	public class Piece
+    /// <summary>
+    /// Piece Class. Instantiate with a color.
+    /// </summary>
+    public class Piece : IPiece
     {
         public Color Color { get; set; }
         public (int, int)? Position { get; set; }
