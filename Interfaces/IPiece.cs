@@ -7,7 +7,5 @@
         Color Color { get; set; }
         bool InPlay { get; }
         (int, int)? Position { get; set; }
-
-        string ToString();
     }
 }
